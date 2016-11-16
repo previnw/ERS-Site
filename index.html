@@ -2,68 +2,92 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>ERS</title>
-<script src="script.js"></script>
+<title>Electronic Retail Store</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style>
+.navbar {
+	margin-bottom: 0;
+	border-radius: 0;
+}
+</style>
 </head>
-
-<body>
-<div class="item">
-  <h2>ERS</h2>
-  <p><strong>Macbook Pro 2016</strong></p>
-  <ul>
-    <li>2.0GHz dual-core Intel Core i5 processor</li>
-    <li>Turbo Boost up to 3.1GHz</li>
-    <li>8GB 1866MHz memory</li>
-    <li>256GB PCIe-based SSD1</li>
-    <li>Intel Iris Graphics 540</li>
-    <li>Two Thunderbolt 3 ports</li>
-  </ul>
-  <div class="info">
-    <p>Stock: <span id="">X</span></p>
-    <span>Price: $1499</span> </div>
-  <div class="order">
-    <label for="txt-q-bball">Quantity desired:</label>
-    <input type="number" min="0" id="txt-q-bball" size="3" placeholder="0">
-    <input type="submit" value="Add to Cart" id="btn-estimate" onclick="estimateTotal()">
+	<body>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+      <a class="navbar-brand" href="#">ERS</a> </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Home</a></li>
+        <li><a href="#">Track</a></li>
+        <li><a href="#">Order History</a></li>
+        <li><a href="#">Cart <span class="badge">0</span></a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="jumbotron">
+  <div class="container text-center">
+    <h1>Electronic Retail Store</h1>
   </div>
 </div>
-<div class="group calc">
-  <p> Subtotal: <br>
-    <input type="text" id="txt-estimate" placeholder="$0.00">
-  </p>
-  <div id="results"></div>
+<div class = "container">
+<form class="form-inline">
+<div class="form-group">
+  <input type="search" class="form-control" id="search" placeholder="Search for a product">
+  <button type="button" class="btn btn-sm btn-default" id = "btn-search">Search</button>
+	<br></form>
 </div>
-<div class = "ship info"> Shipping Info <br>
-  <textarea name="FName" id="txt-ship-fname" rows="1" placeholder="First Name"></textarea>
-  <textarea name="LName" id="txt-ship-lname" rows="1" placeholder="Last Name"></textarea>
-  <br>
-  <textarea name="Saddress" id="txt-ship-address" rows="1" placeholder="Street Address"></textarea>
-  <textarea name="Zip" id="txt-ship-zip" rows="1" placeholder="ZIP"></textarea>
-</div>
-<div class = "ship info"><br>
-  Billing Info <br>
-  <textarea name="FName" id="txt-bill-fname" rows="1" placeholder="First Name"></textarea>
-  <textarea name="LName" id="txt-bill-lname" rows="1" placeholder="Last Name"></textarea>
-  <br>
-  <textarea name="Saddress" id="txt-bill-address" rows="1" placeholder="Street Address"></textarea>
-  <textarea name="Zip" id="txt-bill-zip" rows="1" placeholder="ZIP"></textarea>
-  <br>
-  <select id="s-card-type" required>
-    <option value="">Card Type</option>
-    <option value="VISA">Visa</option>
-    <option value="MC">Mastercard</option>
-    <option value="AMEX">American Express</option>
-    <option value="DSC">Discover</option>
-  </select>
-  <br>
-  <textarea name="Card Num" id="txt-card-num" rows="1" placeholder="Card Number"></textarea>
-</div>
-<div class = "checkout">
-  <p>
-    <input type ="submit" value = "Checkout" id ="btn-checkout" onclick="checkout()">
-  </p>
 </div>
 
-<div id="order-confirm"></div>
+
+<div class="container-fluid bg-3 text-center"> 
+<a href=""><strong>All Products</strong></a> | <a href="">TVs</a> | <a href="">Tablets</a> | <a href="">Laptops</a>  <br><br>
+<div class="row">
+    <div class="col-sm-3">
+      <img src="img/img01.jpg" class="img-responsive" style="width:100%" alt="Image">
+      <p>Macbook Pro 2016</p>
+    </div>
+    <div class="col-sm-3">
+      <img src="img/img02.jpg" class="img-responsive" style="width:100%" alt="Image">
+      <p>Galaxy Tab T3</p>
+    </div>
+    <div class="col-sm-3">
+      
+      <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
+      <p>Some text..</p>
+    </div>
+    <div class="col-sm-3">
+      
+      <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
+      <p>Some text..</p>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-sm-3">
+      <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
+      <p>Some text..</p>
+    </div>
+    <div class="col-sm-3">
+      <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
+      <p>Some text..</p>
+    </div>
+    <div class="col-sm-3">
+      
+      <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
+      <p>Some text..</p>
+    </div>
+    <div class="col-sm-3">
+      
+      <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
+      <p>Some text..</p>
+    </div>
+  </div>
+</div>
 </body>
 </html>
