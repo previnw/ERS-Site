@@ -10,8 +10,8 @@
 	<script src="script.js"></script>
 	<script>
 	$(document).ready(function(){
-
-		 $("#products").load("products.html");
+		setAllProducts();
+		
 
 	});
 
@@ -44,20 +44,13 @@
 				<h1>Electronic Retail Store</h1>
 			</div>
 		</div>
-		<div class = "container">
-			<form class="form-inline">
-				<div class="form-group">
-					<input type="search" class="form-control" id="search" placeholder="Search for a product">
-					<button type="button" class="btn btn-sm btn-default" id = "btn-search">Search</button>
-					<br></form>
-				</div>
+
+
+
+		<div class="container-fluid bg-3 text-center">
+			<div id ="products">
+
 			</div>
-
-
-			<div class="container-fluid bg-3 text-center">
-				<div id ="products">
-
-				</div>
-			</div>
-		</body>
-		</html>
+		</div>
+	</body>
+	</html>

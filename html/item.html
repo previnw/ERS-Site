@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+</head>
+<body>
+  <script>
+
+  _get = function( name ) {
+
+  	//Get Variables
+  	var vars = {};
+  	var parts = window.location.href.replace( /[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+  	vars[key] = value.replace('#','');
+  	});
+
+  	//Return
+  	return vars[name];
+  }
+
+  $.getJSON('http://ers.kaiw.dk/items/', function(data) {
+    data.forEach( function ( item ) {
+      if( item.sku  == _get('item') ) {
+        alert(item.title);
+      }
+    });
+  });
+  </script>
+</body>
+</html>
