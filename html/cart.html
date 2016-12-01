@@ -10,8 +10,8 @@
 	<script src="script.js"></script>
 	<script>
 	$(document).ready(function(){
-		setAllProducts();
 		getCart();
+		$("#total-item").html(getCookie("cart"));
 
 	});
 
@@ -31,11 +31,11 @@
 				<a class="navbar-brand" href="http://ers.kaiw.dk/">ERS</a> </div>
 				<div class="collapse navbar-collapse" id="myNavbar">
 					<ul class="nav navbar-nav">
-						<li class="active"><a href="/">Home</a></li>
+						<li><a href="/">Home</a></li>
 						<li><a href="/products.html">Track</a></li>
 						<li><a href="#">Order History</a></li></ul>
 						<ul class="nav navbar-nav navbar-right">
-							<li><a href="/cart.html">Cart <span class="badge" id ="cart-num">0</span></a></li>
+							<li class="active"><a href="#">Cart <span class="badge" id ="cart-num">0</span></a></li>
 						</ul>
 					</div>
 				</div>
@@ -47,11 +47,9 @@
 			</div>
 
 
-
-			<div class="container-fluid bg-3 text-center">
-				<div id ="products">
-
-				</div>
+<div class="col-sm-2"></div>
+			<div class="col-sm-10">
+				Total Number Of Items: <span id="total-item">X</span>
 			</div>
 		</body>
 		</html>

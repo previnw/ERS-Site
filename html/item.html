@@ -1,30 +1,132 @@
 <!doctype html>
 <html>
 <head>
+  <meta charset="UTF-8">
+  <title>Electronic Retail Store</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-</head>
-<body>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="script.js"></script>
+
+  <style>
+  .navbar {
+    margin-bottom: 0;
+    border-radius: 0;
+  }
+  </style>
+
   <script>
 
   _get = function( name ) {
 
-  	//Get Variables
-  	var vars = {};
-  	var parts = window.location.href.replace( /[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
-  	vars[key] = value.replace('#','');
-  	});
+    //Get Variables
+    var vars = {};
+    var parts = window.location.href.replace( /[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+      vars[key] = value.replace('#','');
+    });
 
-  	//Return
-  	return vars[name];
+    //Return
+    return vars[name];
   }
 
   $.getJSON('http://ers.kaiw.dk/items/', function(data) {
     data.forEach( function ( item ) {
       if( item.sku  == _get('item') ) {
-        alert(item.title);
+        $("#img-item0").attr("src",item.photo);
+        $("#txt-item0").html(item.title);
+        $("#txt-desc").html(item.descr);
+        $("#price").html(item.price);
+        document.title = item.title;
       }
     });
+
   });
+
+  $(document).ready(function(){
+    getCart();
+
+
+
+  });
+
+  function addToCart(){
+    var sku = "i"+_get('item' )+".";
+    console.log("SKU=" + sku);
+
+    if ((document.cookie.indexOf(sku) == -1)||getCookie(sku)=="NaN"){
+    setCookie(sku,0);
+    console.log("set" + sku + "to 0: " + getCookie(sku));
+    }
+    var quant = parseInt(document.getElementById('num-quantity').value, 10) || 0;
+    var x = parseInt(getCookie(sku)) + quant;
+    setCookie (sku, x);
+    var y = parseInt(getCookie('cart')) + quant;
+    setCookie ('cart',y);
+  
+      getCart();
+
+  }
+
+
+
   </script>
-</body>
-</html>
+</head>
+<body>
+
+
+
+
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+        <a class="navbar-brand" href="http://ers.kaiw.dk/">ERS</a> </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+          <ul class="nav navbar-nav">
+            <li><a href="/">Home</a></li>
+            <li><a href="/products.html">Track</a></li>
+            <li><a href="#">Order History</a></li></ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="/cart.html">Cart <span class="badge" id ="cart-num">X</span></a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <div class="jumbotron">
+        <div class="container text-center">
+          <h1>Electronic Retail Store</h1>
+        </div>
+      </div>
+
+
+
+      <div class="container-fluid bg-3 text-center">
+        <div id ="products">
+          <div id="sec-item0">
+            <div class="col-sm-5">
+
+              <img id ="img-item0" src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image" >
+            </div>
+
+            <div class="col-sm-5">
+              <h3><div id ="txt-item0">Title</div></h3>
+              <p><div id ="txt-desc" class="text-left">Description Description Description Description Description Description Description </div></p>
+              <br><br>
+              <div class="col-md-6">Quantity Remaining: <strong><span id="qnty-remain">X</span></strong></div>
+              <div class="col-md-6 text-right">Price: <strong>$<span id="price">X</span></strong></div>
+              <br><br>
+              <div class="text-right" >Quantity: <select class="selectpicker" id = "num-quantity">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+              </select> <button type="button" class="btn btn-primary btn-sm" onclick="addToCart()">Add To Cart</button></div>
+
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </body>
+    </html>
