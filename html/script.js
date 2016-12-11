@@ -35,6 +35,12 @@ function updateAllProducts(){
 	});
 }
 
+function clearCart(){
+	var text = '{"quantity":0}';
+	setCookie("jsonCart",text);
+	location.reload();
+}
+
 function getCookie(cname) {
     var name = cname + "=";
     var ca = document.cookie.split(';');
@@ -55,13 +61,51 @@ function setCookie(cname, cvalue) {
 }
 
 function getCart(){
-	if (!(document.cookie.indexOf('cart') > -1)) {
-			document.cookie = "cart=0;path=/";
+	// if (!(document.cookie.indexOf('cart') > -1)) {
+	// 		document.cookie = "cart=0;path=/";
+	//
+	// } else {
+	// 	$("#cart-num").html(getCookie("cart"));
+	// }
+
+	if (!(document.cookie.indexOf('jsonCart') > -1)) {
+		var text = '{"quantity":0}';
+		setCookie("jsonCart",text);
 
 	} else {
-		$("#cart-num").html(getCookie("cart"));
+		var obj = JSON.parse(getCookie("jsonCart"));
+		$("#cart-num").html(obj.quantity);
 	}
 }
+
+function loadFromCookie(key) {
+	var cookieArray = document.cookie.split(";");
+	var element = null;
+	var elementValue = null;
+	element = cookieArray.find(function(itm) {
+		var keyValue = itm.split("=");
+		console.log(key);
+		keyValue[0] = keyValue[0].trim();
+		return keyValue[0].toString() === key;
+	});
+	return element;
+	if (element) {
+		console.log(element);
+		elementValue = element.split("=")[1];
+	}
+	else {
+		elementValue = null;
+	}
+	return elementValue;
+}
+
+/*
+function getCartJSON() {
+	var cookie = document.cookie;
+	console.log(cookie);
+	//console.log(cookie.
+}
+*/
 
 function setAllProducts(){
 	$("#products").load("products.html");
@@ -71,6 +115,8 @@ function setAllProducts(){
 			$("#item"+j).load("itemTemplate.html #sec-item"+j);
 		}
 	});
+
+
 
 
 	$.getJSON('http://ers.kaiw.dk/items/', function(data) {

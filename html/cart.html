@@ -11,7 +11,43 @@
 	<script>
 	$(document).ready(function(){
 		getCart();
-		$("#total-item").html(getCookie("cart"));
+		var obj = JSON.parse(getCookie("jsonCart"));
+		var x = Object.keys(obj).length - 1;
+		var subtotal = 0;
+		for(var j=0;j<x;j++){
+			$("#item"+j).load("cartTemplate.html #sec-item"+j);
+
+			var jx = 0;
+			$.getJSON('http://ers.kaiw.dk/items/', function(data) {
+				var dataLength= data.length;
+				for(var y=0;y<dataLength;y++){
+
+
+					if(obj.hasOwnProperty(data[y].sku)){
+
+						$("#txt-item"+(jx)).html(data[y].title);
+						$("#price-item"+(jx)).html(data[y].price);
+						$("#qnty-item"+(jx)).html(obj[data[y].sku]);
+						$("#subt-item"+(jx)).html((obj[data[y].sku]*data[y].price).toFixed(2));
+
+						subtotal = parseFloat(subtotal) + parseFloat((obj[data[y].sku]*data[y].price).toFixed(2));
+						$("#txt-subt").html("$"+subtotal);
+						delete obj[data[y].sku];
+						jx++;
+					}
+					// $("#img-item"+j).attr("src",data[j].photo);
+					// $("#txt-item"+j).html(data[j].title);
+					// // alert(data[j].photo);
+					// var imageElement = document.getElementById('img-item'+j);
+					// var anchorElement = imageElement.parentNode;
+					// anchorElement.href = 'item.html?item=' + data[j].sku;
+				}
+			});
+
+		}
+
+
+
 
 	});
 
@@ -47,9 +83,43 @@
 			</div>
 
 
-<div class="col-sm-2"></div>
-			<div class="col-sm-10">
-				Total Number Of Items: <span id="total-item">X</span>
+			<div class="container" id ="cart-body">
+
+				<h1 >Shopping Cart</h1><hr>
+				<a href="#" onclick="clearCart()">Clear Cart</a>
+
+				<table class="table table-striped table-hover table-bordered">
+					<tbody>
+
+
+						<div id ="item0"></div>
+						<div id ="item1"></div>
+						<div id ="item2"></div>
+						<div id ="item3"></div>
+						<div id ="item4"></div>
+						<div id ="item5"></div>
+						<div id ="item6"></div>
+						<div id ="item7"></div>
+						<div id ="item8"></div>
+						<div id ="item9"></div>
+						<div id ="item10"></div>
+						<div id ="item11"></div>
+						<div id ="item12"></div>
+						<div id ="item13"></div>
+						<div id ="item14"></div>
+						<div id ="item15"></div>
+						<tr>
+							<th colspan="3"><span class="pull-right">Total</span></th>
+							<th id = "txt-subt">$0.00</th>
+						</tr>
+
+						<tr>
+							<td><a href="/" class="btn btn-primary">Continue Shopping</a></td>
+							<td colspan="3"><a href="/checkout.html" class="pull-right btn btn-success">Checkout</a></td>
+						</tr>
+					</tbody>
+				</table>
+
 			</div>
 		</body>
 		</html>

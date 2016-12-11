@@ -51,20 +51,34 @@
   });
 
   function addToCart(){
-    var sku = "i"+_get('item' )+".";
-    console.log("SKU=" + sku);
+    var obj = JSON.parse(getCookie("jsonCart"));
+    var sku = _get('item' );
 
-    if ((document.cookie.indexOf(sku) == -1)||getCookie(sku)=="NaN"){
-    setCookie(sku,0);
-    console.log("set" + sku + "to 0: " + getCookie(sku));
-    }
-    var quant = parseInt(document.getElementById('num-quantity').value, 10) || 0;
-    var x = parseInt(getCookie(sku)) + quant;
-    setCookie (sku, x);
-    var y = parseInt(getCookie('cart')) + quant;
-    setCookie ('cart',y);
-  
+    if (obj[sku]== undefined)
+    obj[sku] = 0;
+    obj[sku]++;
+    obj.quantity++;
+
+    setCookie("jsonCart",JSON.stringify(obj));
+
+
+    // var sku = "i"+_get('item' )+".";
+    // console.log("SKU=" + sku);
+    //
+    //
+    // if ((document.cookie.indexOf(sku) == -1)||getCookie(sku)=="NaN"){
+    // setCookie(sku,0);
+    // console.log("set" + sku + "to 0: " + getCookie(sku));
+    // }
+    // var quant = parseInt(document.getElementById('num-quantity').value, 10) || 0;
+    // var x = parseInt(getCookie(sku)) + quant;
+    // setCookie (sku, x);
+    // var y = parseInt(getCookie('cart')) + quant;
+    // setCookie ('cart',y);
+
       getCart();
+
+
 
   }
 
@@ -113,14 +127,10 @@
               <h3><div id ="txt-item0">Title</div></h3>
               <p><div id ="txt-desc" class="text-left">Description Description Description Description Description Description Description </div></p>
               <br><br>
-              <div class="col-md-6">Quantity Remaining: <strong><span id="qnty-remain">X</span></strong></div>
+              
               <div class="col-md-6 text-right">Price: <strong>$<span id="price">X</span></strong></div>
               <br><br>
-              <div class="text-right" >Quantity: <select class="selectpicker" id = "num-quantity">
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-              </select> <button type="button" class="btn btn-primary btn-sm" onclick="addToCart()">Add To Cart</button></div>
+              <div class="text-right" ><button type="button" class="btn btn-primary btn-sm" onclick="addToCart()">Add To Cart</button></div>
 
 
             </div>

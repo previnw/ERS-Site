@@ -1,0 +1,19 @@
+Options +FollowSymLinks
+
+<FilesMatch "\.(htaccess|htpasswd|ini|log|sh|inc|bak)$">
+Order Allow,Deny
+Deny from all
+</FilesMatch>
+
+# Rewrite all requests except to /index.php to /index.php
+RewriteEngine On
+RewriteCond %{REQUEST_URI} !=/
+RewriteCond %{REQUEST_URI} !=/index.php
+RewriteCond %{REQUEST_URI} !.*\.html [NC]
+RewriteCond %{REQUEST_URI} !.*\.js [NC]
+RewriteCond %{REQUEST_URI} !.*\.gif [NC]
+RewriteCond %{REQUEST_URI} !.*\.jpg [NC]
+RewriteCond %{REQUEST_URI} !.*\.jpeg [NC]
+RewriteCond %{REQUEST_URI} !.*\.png [NC]
+RewriteCond %{REQUEST_URI} !.*\.tiff [NC]
+RewriteRule .* /index.php
